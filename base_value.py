@@ -35,7 +35,7 @@ class BaseValue:
 
     def add_value(self, quantity, cost=1):
         self._quantity += quantity
-        self._cost += round(quantity * cost, 2)
+        self._cost = round(self._cost + cost, 2)
         return {'type': 'add', 'name': self.get_name(), 'quantity': quantity}
 
     def delete_value(self, quantity, cost=0):

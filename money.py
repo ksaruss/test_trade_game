@@ -9,8 +9,8 @@ class Money(BaseValue):
 
     def add_value(self, quantity, cost=1):
         r = quantity * cost
-        self._quantity += r
-        self._cost += r
+        self._quantity = round(self._quantity + r, 2)
+        self._cost = round(self._cost + r, 2)
         return {'type': 'add', 'name': self.get_name(), 'quantity': quantity}
 
     def delete_value(self, quantity, cost=0):
