@@ -1,4 +1,13 @@
 from values import Values
+from objects.company import Company
+
+
+c1 = Company(1)
+
+c1.create('money', 1000)
+
+print(c1.get_list_resources())
+
 
 
 

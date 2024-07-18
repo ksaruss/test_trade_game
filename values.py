@@ -12,7 +12,7 @@ class Values:
                                        }
         self._financial_result = 0
 
-    def get_res(self):
+    def get_list_resources(self):
         list_res = {}
         for name_res in self._res:
             list_res[name_res] = self._res[name_res].get_info()
@@ -27,11 +27,11 @@ class Values:
     def get_financial_result(self):
         return round(self._financial_result, 2)
 
-    def create(self, name_value, quantity, cost=0):
+    def create(self, name_value: str, quantity: int, cost: float = 1.0):
         add_value: BaseValue = self._res[name_value]
         add_value.add_value(quantity, cost)
 
-    def trade(self, type_, value_one, quantity, price, value_two):
+    def trade(self, type_: str, value_one: str, quantity: int, price: float, value_two: str):
         one: BaseValue = self._res[value_one]
         two: BaseValue = self._res[value_two]
 
@@ -42,7 +42,7 @@ class Values:
             elif one.get_type() == 'product' and two.get_type() == 'money' and type_ == 'sell':
                 b = one.delete_value(quantity)
                 two.add_value(quantity, price)
-                print(f'financial result {round(quantity * price - b["cost_all"], 2)}')
+                # print(f'financial result {round(quantity * price - b["cost_all"], 2)}')
                 self._financial_result += round(quantity * price - b["cost_all"], 2)
             elif one.get_type() != 'money' and two.get_type() != 'money' and type_ == 'buy':
                 b = two.delete_value(quantity * price)
@@ -51,4 +51,3 @@ class Values:
                 raise Exception(f'not screenplay {one.get_type()}, {two.get_type()}, {type_}')
         else:
             raise Exception(f'not res {two.get_name()}')
-
