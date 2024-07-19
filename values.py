@@ -1,3 +1,4 @@
+from accounting import Accounting
 from base_value import BaseValue
 from money import Money
 from corn import Corn
@@ -10,7 +11,7 @@ class Values:
                                        'corn': Corn(),
                                        'milk': Milk()
                                        }
-        self._financial_result = 0
+        self.accounting: 'Accounting' = Accounting()
 
     def get_list_resources(self):
         list_res = {}
@@ -24,12 +25,10 @@ class Values:
             assets += self._res[name_res].get_cost()
         return round(assets, 2)
 
-    def get_financial_result(self):
-        return round(self._financial_result, 2)
-
     def create(self, name_value: str, quantity: int, cost: float = 1.0):
         add_value: BaseValue = self._res[name_value]
         add_value.add_value(quantity, cost)
+        self.accounting.add_capital_stock(add_value, quantity, cost)
 
     def trade(self, type_: str, value_one: str, quantity: int, price: float, value_two: str):
         one: BaseValue = self._res[value_one]

@@ -6,6 +6,9 @@ c1 = Company(1)
 
 c1.create('money', 1000)
 
+
+print(c1.accounting.get_accounting_book())
+
 print(c1.get_list_resources())
 
 

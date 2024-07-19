@@ -52,4 +52,8 @@ class BaseValue:
             self._cost = round(self._cost - cost_all, 2)
         return {'type': 'delete', 'name': self.get_name(), 'cost_one': cost_one, 'cost_all': cost_all}
 
+    @property
+    def type(self):
+        return self._type
+
 
